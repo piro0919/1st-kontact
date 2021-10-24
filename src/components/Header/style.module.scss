@@ -1,0 +1,67 @@
+@use "sass:map";
+@import "styles/breakpoints";
+@import "styles/constants";
+@import "sass-mq";
+
+.header {
+  height: 90vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.iframe {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.heading1Wrapper,
+.heading1Wrapper::before,
+.heading1Wrapper::after {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.heading1Wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.heading1Wrapper::before,
+.heading1Wrapper::after {
+  content: "";
+}
+
+.heading1Wrapper::before {
+  background: url("./images/dot.png") center / 5px repeat;
+  opacity: 75%;
+}
+
+.heading1Wrapper::after {
+  background: transparent
+    linear-gradient(
+      map.get($colors, black) 10%,
+      transparent 30%,
+      transparent 70%,
+      map.get($colors, black) 90%
+    )
+    repeat scroll 0 0;
+}
+
+.heading1 {
+  font: 18rem map.get($fonts, black-ops-one);
+  letter-spacing: -24px;
+  position: relative;
+  text-indent: -24px;
+  @include mq($until: tablet) {
+    transform: scale(0.4);
+  }
+  @include mq($from: tablet, $until: desktop) {
+    transform: scale(0.8);
+  }
+}

@@ -1,0 +1,29 @@
+@use "sass:map";
+@import "styles/breakpoints";
+@import "styles/constants";
+@import "sass-mq";
+
+.article {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+  @include mq($from: tablet) {
+    grid-template: auto / auto 1fr;
+  }
+}
+
+.heading2Wrapper {
+  align-items: flex-end;
+  display: flex;
+  @include mq($from: tablet) {
+    transform: rotate(180deg);
+  }
+}
+
+.heading2 {
+  color: map.get($colors, gray);
+  font: 4.8rem map.get($fonts, caveat);
+  @include mq($from: tablet) {
+    writing-mode: vertical-rl;
+  }
+}

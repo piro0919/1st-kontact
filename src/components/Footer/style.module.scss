@@ -1,0 +1,12 @@
+@use "sass:map";
+@import "styles/constants";
+
+.footer {
+  align-items: center;
+  color: map.get($colors, gray);
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: 900;
+  height: 120px;
+  justify-content: center;
+}

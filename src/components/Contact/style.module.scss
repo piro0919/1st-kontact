@@ -1,0 +1,54 @@
+@use "sass:map";
+@import "styles/breakpoints";
+@import "styles/constants";
+@import "sass-mq";
+
+.formInner {
+  display: grid;
+  @include mq($until: tablet) {
+    gap: 16px;
+  }
+  @include mq($from: tablet) {
+    gap: 24px;
+  }
+}
+
+.fieldWrapper {
+  display: grid;
+}
+
+.label {
+  color: map.get($colors, gray);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.abbr {
+  padding: 0 0 0 4px;
+}
+
+.input,
+.textarea {
+  background: map.get($colors, lightgray);
+  color: map.get($colors, white);
+  padding: 4px 8px;
+}
+
+.textarea {
+  min-height: 120px;
+  overflow: hidden scroll;
+  resize: vertical;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 36px 0 0;
+}
+
+.button {
+  background: map.get($colors, lightgray);
+  color: map.get($colors, white);
+  padding: 4px 0;
+  width: 96px;
+}

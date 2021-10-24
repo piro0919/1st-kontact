@@ -1,0 +1,39 @@
+@import "styles/breakpoints";
+@import "sass-mq";
+
+.list {
+  display: grid;
+  @include mq($until: tablet) {
+    gap: 16px;
+  }
+  @include mq($from: tablet, $until: desktop) {
+    gap: 24px;
+    grid-template: auto / repeat(2, 1fr);
+  }
+  @include mq($from: desktop) {
+    gap: 24px;
+    grid-template: auto / repeat(3, 1fr);
+  }
+}
+
+.imageWrapper {
+  cursor: pointer;
+  position: relative;
+}
+
+.imageWrapper::before {
+  content: "";
+  display: block;
+  padding: 100% 0 0;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: flex-end;
+  @include mq($until: tablet) {
+    padding: 16px 0 0;
+  }
+  @include mq($from: tablet) {
+    padding: 24px 0 0;
+  }
+}

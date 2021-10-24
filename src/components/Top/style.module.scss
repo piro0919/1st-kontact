@@ -1,0 +1,25 @@
+@import "styles/breakpoints";
+@import "sass-mq";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  display: grid;
+  gap: 72px;
+  max-width: 1080px;
+  width: 100%;
+  @include mq($until: tablet) {
+    padding: 0 16px;
+  }
+  @include mq($from: tablet) {
+    padding: 0 24px;
+  }
+}
+
+.rightJustified {
+  display: flex;
+  justify-content: flex-end;
+}
