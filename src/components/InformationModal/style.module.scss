@@ -3,6 +3,27 @@
 @import "styles/constants";
 @import "sass-mq";
 
+.wrapper {
+  @include mq($until: tablet) {
+    padding: 16px;
+  }
+  @include mq($from: tablet) {
+    padding: 24px;
+  }
+}
+
+.inner {
+  background: map.get($colors, black);
+  max-width: 720px;
+  width: 100%;
+  @include mq($until: tablet) {
+    padding: 16px;
+  }
+  @include mq($from: tablet) {
+    padding: 24px;
+  }
+}
+
 .list {
   display: grid;
   @include mq($until: tablet) {
@@ -41,13 +62,9 @@
   border-radius: 0 !important;
 }
 
-.iconWrapper {
-  display: flex;
-  justify-content: flex-end;
-  @include mq($until: tablet) {
-    padding: 16px 0 0;
-  }
-  @include mq($from: tablet) {
-    padding: 24px 0 0;
-  }
+.buttonWrapper {
+  padding: 12px 32px;
+  position: fixed;
+  right: 0;
+  top: 0;
 }

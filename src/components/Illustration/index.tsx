@@ -9,7 +9,7 @@ import styles from "./style.module.scss";
 
 type Illustration = {
   onClick: MouseEventHandler<HTMLDivElement>;
-  src: string;
+  url: string;
 };
 
 export type IllustrationProps = {
@@ -22,10 +22,10 @@ function Illustration({ illustrations }: IllustrationProps): JSX.Element {
     () =>
       illustrations
         .filter((_, index) => (showAll ? true : index < 6))
-        .map(({ onClick, src }, index) => (
+        .map(({ onClick, url }, index) => (
           <li key={index}>
             <div className={styles.imageWrapper} onClick={onClick}>
-              <Image alt="" layout="fill" objectFit="cover" src={src} />
+              <Image alt="" layout="fill" objectFit="cover" src={url} />
             </div>
           </li>
         )),

@@ -11,7 +11,7 @@
   "ignorePatterns": ["commitlint.config.js", "next.config.js"],
   "overrides": [
     {
-      "excludedFiles": ["_app.tsx", "_document.tsx"],
+      "excludedFiles": ["_app.tsx", "_document.tsx", "*.d.ts"],
       "files": "*",
       "rules": {
         "filenames/match-exported": ["error", [null, "camel"]],

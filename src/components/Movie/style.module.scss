@@ -1,8 +1,13 @@
 .wrapper {
+  padding: 0 0 40px;
+  width: 100%;
+}
+
+.iframeWrapper {
   position: relative;
 }
 
-.wrapper::before {
+.iframeWrapper::before {
   content: "";
   display: block;
   padding: 56.25% 0 0;
