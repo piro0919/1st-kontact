@@ -24,9 +24,10 @@ function Pages({
     showInformationModal,
     { off: offShowInformationModal, on: onShowInformationModal },
   ] = useSwitch(false);
-  const handleSubmit = useCallback<TopProps["onSubmit"]>(async () => {
+  const handleSubmit = useCallback<TopProps["onSubmit"]>(async (values) => {
     const { status } = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/email`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/email`,
+      values
     );
 
     await swal(

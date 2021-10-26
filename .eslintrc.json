@@ -51,6 +51,12 @@
     "semi": "error",
     "sort-destructure-keys/sort-destructure-keys": "error",
     "sort-keys": "off",
-    "sort-keys-shorthand/sort-keys-shorthand": "error"
+    "sort-keys-shorthand/sort-keys-shorthand": [
+      "error",
+      "asc",
+      {
+        "shorthand": "first"
+      }
+    ]
   }
 }
