@@ -1,5 +1,7 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
 import styles from "./style.module.scss";
 
 type FieldValues = {
@@ -15,12 +17,32 @@ type FieldValues = {
   release: string;
 };
 
+const schema = yup.object().shape({
+  budget: yup.string().required("報酬の予算について入力してください"),
+  client: yup.string().required("大本のクライアント社名を入力してください"),
+  content: yup.string().required("作業内容について入力してください"),
+  date: yup.string().required("希望納期を入力してください"),
+  email: yup
+    .string()
+    .required("Emailを入力してください")
+    .email("Emailの形式で入力してください"),
+  homepage: yup.string().url("urlの形式で入力してください"),
+  media: yup.string().required("リリース媒体を入力してください"),
+  name: yup.string().required("お名前を入力してください"),
+  others: yup.string().required("その他、案件内容について入力してください"),
+  release: yup.string().required("実績公開について入力してください"),
+});
+
 export type ContactProps = {
   onSubmit: SubmitHandler<FieldValues>;
 };
 
 function Contact({ onSubmit }: ContactProps): JSX.Element {
-  const { handleSubmit, register } = useForm<FieldValues>({
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<FieldValues>({
     defaultValues: {
       budget: "",
       client: "",
@@ -33,6 +55,7 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
       others: "",
       release: "",
     },
+    resolver: yupResolver(schema),
   });
 
   return (
@@ -47,6 +70,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="name"
           />
+          {errors.name ? (
+            <p className={styles.errorWrapper}>{errors.name.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="email">
@@ -56,7 +82,11 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             {...register("email", { required: true })}
             className={styles.input}
             id="email"
+            type="email"
           />
+          {errors.email ? (
+            <p className={styles.errorWrapper}>{errors.email.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="homepage">
@@ -66,7 +96,11 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             {...register("homepage")}
             className={styles.input}
             id="homepage"
+            type="url"
           />
+          {errors.homepage ? (
+            <p className={styles.errorWrapper}>{errors.homepage.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="client">
@@ -77,6 +111,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="client"
           />
+          {errors.client ? (
+            <p className={styles.errorWrapper}>{errors.client.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="budget">
@@ -87,6 +124,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="budget"
           />
+          {errors.budget ? (
+            <p className={styles.errorWrapper}>{errors.budget.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="content">
@@ -97,6 +137,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="content"
           />
+          {errors.content ? (
+            <p className={styles.errorWrapper}>{errors.content.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="release">
@@ -107,6 +150,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="release"
           />
+          {errors.release ? (
+            <p className={styles.errorWrapper}>{errors.release.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="media">
@@ -117,6 +163,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.input}
             id="media"
           />
+          {errors.media ? (
+            <p className={styles.errorWrapper}>{errors.media.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="date">
@@ -126,7 +175,11 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             {...register("date", { required: true })}
             className={styles.input}
             id="date"
+            type="date"
           />
+          {errors.date ? (
+            <p className={styles.errorWrapper}>{errors.date.message}</p>
+          ) : null}
         </div>
         <div className={styles.fieldWrapper}>
           <label className={styles.label} htmlFor="others">
@@ -137,6 +190,9 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
             className={styles.textarea}
             id="others"
           />
+          {errors.others ? (
+            <p className={styles.errorWrapper}>{errors.others.message}</p>
+          ) : null}
         </div>
       </div>
       <div className={styles.buttonWrapper}>

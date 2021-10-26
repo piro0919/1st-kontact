@@ -62,7 +62,7 @@ function Top({
           </Article>
         </div>
       )),
-    [illustrations, informations, onShowInformationModal, onSubmit]
+    [illustrations, informations, onShowInformationModal, onSubmit, videos]
   );
 
   return (

@@ -41,6 +41,11 @@
   resize: vertical;
 }
 
+.errorWrapper {
+  color: #f00;
+  margin: 4px 0 0;
+}
+
 .buttonWrapper {
   display: flex;
   justify-content: center;
@@ -50,6 +55,6 @@
 .button {
   background: map.get($colors, lightgray);
   color: map.get($colors, white);
-  padding: 4px 0;
-  width: 96px;
+  padding: 8px 0;
+  width: 84px;
 }
