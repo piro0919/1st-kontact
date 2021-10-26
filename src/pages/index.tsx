@@ -1,5 +1,5 @@
 import useSwitch from "@react-hook/switch";
-import emailjs from "emailjs-com";
+import axios from "axios";
 import { GetStaticProps } from "next";
 import { NextSeo } from "next-seo";
 import React, { useCallback, useMemo, useState } from "react";
@@ -24,60 +24,25 @@ function Pages({
     showInformationModal,
     { off: offShowInformationModal, on: onShowInformationModal },
   ] = useSwitch(false);
-  const handleSubmit = useCallback<TopProps["onSubmit"]>(
-    async ({
-      budget,
-      client,
-      content,
-      date,
-      email,
-      homepage,
-      media,
-      name,
-      others,
-      release,
-    }) => {
-      if (
-        typeof process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID !== "string" ||
-        typeof process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID !== "string"
-      ) {
-        return;
-      }
+  const handleSubmit = useCallback<TopProps["onSubmit"]>(async () => {
+    const { status } = await axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/email`
+    );
 
-      const { status } = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAIL_JS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAIL_JS_TEMPLATE_ID,
-        {
-          budget,
-          client,
-          content,
-          date,
-          email,
-          homepage,
-          media,
-          name,
-          others,
-          release,
-        },
-        process.env.NEXT_PUBLIC_EMAIL_JS_USER_ID
-      );
-
-      await swal(
-        status >= 200 && status < 300
-          ? {
-              icon: "success",
-              text: "メールの送信を完了しました。",
-              title: "メール送信完了",
-            }
-          : {
-              icon: "error",
-              text: "メールの送信に失敗しました。",
-              title: "メール送信失敗",
-            }
-      );
-    },
-    []
-  );
+    await swal(
+      status >= 200 && status < 300
+        ? {
+            icon: "success",
+            text: "メールの送信を完了しました。",
+            title: "メール送信完了",
+          }
+        : {
+            icon: "error",
+            text: "メールの送信に失敗しました。",
+            title: "メール送信失敗",
+          }
+    );
+  }, []);
   const [showIllustrationIndex, setShowIllustrationIndex] =
     useState<IllustrationModalProps["index"]>();
   const illustrations = useMemo(
