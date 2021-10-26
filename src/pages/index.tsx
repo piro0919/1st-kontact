@@ -16,12 +16,12 @@ export type PagesProps = Pick<
   | "aboutDeliveryTime"
   | "aboutPrice"
   | "flowToDelivery"
-  | "images"
   | "informations"
   | "priceList"
   | "videos"
 > & {
-  illustrations: Pick<TopProps["illustrations"][0], "url">[];
+  illustrations: string[];
+  images: string[];
 };
 
 function Pages({
@@ -29,7 +29,7 @@ function Pages({
   aboutPrice,
   flowToDelivery,
   illustrations: illustrationsProps,
-  images,
+  images: imagesProps,
   informations,
   priceList,
   videos,
@@ -39,46 +39,52 @@ function Pages({
     { off: offShowInformationModal, on: onShowInformationModal },
   ] = useSwitch(false);
   const handleSubmit = useCallback<TopProps["onSubmit"]>(async (values) => {
-    const { status } = await axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/email`,
-      values
-    );
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/email`, values);
 
-    await swal(
-      status >= 200 && status < 300
-        ? {
-            icon: "success",
-            text: "メールの送信を完了しました。",
-            title: "メール送信完了",
-          }
-        : {
-            icon: "error",
-            text: "メールの送信に失敗しました。",
-            title: "メール送信失敗",
-          }
-    );
+      swal({
+        icon: "success",
+        text: "メールの送信を完了しました。",
+        title: "メール送信完了",
+      });
+    } catch {
+      swal({
+        icon: "error",
+        text: "メールの送信に失敗しました。",
+        title: "メール送信失敗",
+      });
+    }
   }, []);
   const [showIllustrationIndex, setShowIllustrationIndex] =
     useState<IllustrationModalProps["index"]>();
-  const illustrations = useMemo(
+  const [showDeliveryImageIndex, setShowDeliveryImageIndex] =
+    useState<IllustrationModalProps["index"]>();
+  const illustrations = useMemo<TopProps["illustrations"]>(
     () =>
       illustrationsProps.map((illustration, index) => ({
-        ...illustration,
         onClick: (): void => {
           setShowIllustrationIndex(index);
         },
+        url: illustration,
       })),
     [illustrationsProps]
+  );
+  const images = useMemo<TopProps["images"]>(
+    () =>
+      imagesProps.map((image, index) => ({
+        onClick: (): void => {
+          setShowDeliveryImageIndex(index);
+        },
+        url: image,
+      })),
+    [imagesProps]
   );
   const handleCloseRequest = useCallback<
     IllustrationModalProps["onCloseRequest"]
   >(() => {
     setShowIllustrationIndex(undefined);
+    setShowDeliveryImageIndex(undefined);
   }, []);
-  const illustrationModalIllustrations = useMemo(
-    () => illustrations.map(({ url }) => url),
-    [illustrations]
-  );
 
   return (
     <>
@@ -142,8 +148,15 @@ function Pages({
       ) : null}
       {typeof showIllustrationIndex === "number" ? (
         <IllustrationModal
-          illustrations={illustrationModalIllustrations}
+          illustrations={illustrationsProps}
           index={showIllustrationIndex}
+          onCloseRequest={handleCloseRequest}
+        />
+      ) : null}
+      {typeof showDeliveryImageIndex === "number" ? (
+        <IllustrationModal
+          illustrations={imagesProps}
+          index={showDeliveryImageIndex}
           onCloseRequest={handleCloseRequest}
         />
       ) : null}
@@ -191,9 +204,7 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
       aboutDeliveryTime: datehtml,
       aboutPrice: pricehtml,
       flowToDelivery: flowhtml,
-      illustrations: illustrations.map(({ image: { url } }) => ({
-        url,
-      })),
+      illustrations: illustrations.map(({ image: { url } }) => url),
       images: deliveryImages.map(({ image: { url } }) => url),
       informations: informationList.map(({ date, title, urlList }) => ({
         date,

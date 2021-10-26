@@ -43,6 +43,7 @@
 
 .imageWrapper {
   background: map.get($colors, gray);
+  cursor: pointer;
   position: relative;
 }
 

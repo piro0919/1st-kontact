@@ -1,7 +1,12 @@
 import parse, { domToReact } from "html-react-parser";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { MouseEventHandler, useMemo } from "react";
 import styles from "./style.module.scss";
+
+type Image = {
+  onClick: MouseEventHandler<HTMLDivElement>;
+  url: string;
+};
 
 type Price = {
   title: string;
@@ -12,7 +17,7 @@ export type PriceProps = {
   aboutDeliveryTime: string;
   aboutPrice: string;
   flowToDelivery: string;
-  images: string[];
+  images: Image[];
   priceList: Price[];
 };
 
@@ -38,10 +43,10 @@ function Price({
   );
   const imageItems = useMemo(
     () =>
-      images.map((image) => (
-        <li key={image}>
-          <div className={styles.imageWrapper}>
-            <Image alt="" layout="fill" objectFit="contain" src={image} />
+      images.map(({ onClick, url }) => (
+        <li key={url}>
+          <div className={styles.imageWrapper} onClick={onClick}>
+            <Image alt="" layout="fill" objectFit="contain" src={url} />
           </div>
         </li>
       )),
