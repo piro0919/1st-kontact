@@ -26,7 +26,7 @@
 
 .heading3 {
   color: map.get($colors, gray);
-  padding: 0 0 4px;
+  padding: 0 0 8px;
 }
 
 .imageList {
@@ -52,6 +52,7 @@
   padding: 100% 0 0;
 }
 
-.item {
+/* stylelint-disable-next-line selector-no-qualifying-type */
+ol.list li {
   margin: 0 0 0 1.4rem;
 }

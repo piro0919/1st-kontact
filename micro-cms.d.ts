@@ -25,6 +25,12 @@ type Informationlist = {
   urlList: Url[];
 };
 
+type Pricedetail = {
+  datehtml: string;
+  flowhtml: string;
+  pricehtml: string;
+};
+
 type Pricelist = {
   title: string;
   value: string;

@@ -12,11 +12,21 @@ export type TopProps = Pick<IllustrationProps, "illustrations"> &
   Pick<ContactProps, "onSubmit"> &
   Pick<InformationProps, "informations"> &
   Pick<MovieProps, "videos"> &
-  Pick<PriceProps, "images" | "priceList"> & {
+  Pick<
+    PriceProps,
+    | "aboutDeliveryTime"
+    | "aboutPrice"
+    | "flowToDelivery"
+    | "images"
+    | "priceList"
+  > & {
     onShowInformationModal: InformationProps["onShowModal"];
   };
 
 function Top({
+  aboutDeliveryTime,
+  aboutPrice,
+  flowToDelivery,
   illustrations,
   images,
   informations,
@@ -55,7 +65,15 @@ function Top({
           maxWidth: "720px",
         },
         {
-          children: <Price images={images} priceList={priceList} />,
+          children: (
+            <Price
+              aboutDeliveryTime={aboutDeliveryTime}
+              aboutPrice={aboutPrice}
+              flowToDelivery={flowToDelivery}
+              images={images}
+              priceList={priceList}
+            />
+          ),
           heading: "Price",
           maxWidth: "720px",
         },
@@ -73,6 +91,9 @@ function Top({
         </div>
       )),
     [
+      aboutDeliveryTime,
+      aboutPrice,
+      flowToDelivery,
       illustrations,
       images,
       informations,

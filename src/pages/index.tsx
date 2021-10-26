@@ -13,12 +13,21 @@ import getClient from "libs/getClient";
 
 export type PagesProps = Pick<
   TopProps,
-  "images" | "informations" | "priceList" | "videos"
+  | "aboutDeliveryTime"
+  | "aboutPrice"
+  | "flowToDelivery"
+  | "images"
+  | "informations"
+  | "priceList"
+  | "videos"
 > & {
   illustrations: Pick<TopProps["illustrations"][0], "url">[];
 };
 
 function Pages({
+  aboutDeliveryTime,
+  aboutPrice,
+  flowToDelivery,
   illustrations: illustrationsProps,
   images,
   informations,
@@ -114,6 +123,9 @@ function Pages({
         }}
       />
       <Top
+        aboutDeliveryTime={aboutDeliveryTime}
+        aboutPrice={aboutPrice}
+        flowToDelivery={flowToDelivery}
         illustrations={illustrations}
         images={images}
         informations={informations}
@@ -156,6 +168,11 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
       limit: 100,
     },
   });
+  const { datehtml, flowhtml, pricehtml } = await client.getObject<Pricedetail>(
+    {
+      endpoint: "pricedetail",
+    }
+  );
   const { contents: priceList } = await client.getList<Pricelist>({
     endpoint: "pricelist",
     queries: {
@@ -171,6 +188,9 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
 
   return {
     props: {
+      aboutDeliveryTime: datehtml,
+      aboutPrice: pricehtml,
+      flowToDelivery: flowhtml,
       illustrations: illustrations.map(({ image: { url } }) => ({
         url,
       })),
