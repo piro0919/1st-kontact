@@ -23,13 +23,9 @@ async function email(req: NextApiRequest, res: NextApiResponse): Promise<void> {
       to: process.env.NODEMAILER_AUTH_USER,
     });
 
-    res.status(200);
-
-    return;
+    res.status(200).json({ result: "ok" });
   } catch {
-    res.status(500);
-
-    return;
+    res.status(500).json({ result: "ng" });
   }
 }
 
