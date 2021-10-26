@@ -5,20 +5,24 @@ import Contact, { ContactProps } from "components/Contact";
 import Illustration, { IllustrationProps } from "components/Illustration";
 import Information, { InformationProps } from "components/Information";
 import Movie, { MovieProps } from "components/Movie";
+import Price, { PriceProps } from "components/Price";
 import Profile from "components/Profile";
 
 export type TopProps = Pick<IllustrationProps, "illustrations"> &
   Pick<ContactProps, "onSubmit"> &
   Pick<InformationProps, "informations"> &
-  Pick<MovieProps, "videos"> & {
+  Pick<MovieProps, "videos"> &
+  Pick<PriceProps, "images" | "priceList"> & {
     onShowInformationModal: InformationProps["onShowModal"];
   };
 
 function Top({
   illustrations,
+  images,
   informations,
   onShowInformationModal,
   onSubmit,
+  priceList,
   videos,
 }: TopProps): JSX.Element {
   const items = useMemo(
@@ -46,7 +50,13 @@ function Top({
         },
         {
           children: <Profile />,
+          className: styles.rightJustified,
           heading: "Profile",
+          maxWidth: "720px",
+        },
+        {
+          children: <Price images={images} priceList={priceList} />,
+          heading: "Price",
           maxWidth: "720px",
         },
         {
@@ -62,7 +72,15 @@ function Top({
           </Article>
         </div>
       )),
-    [illustrations, informations, onShowInformationModal, onSubmit, videos]
+    [
+      illustrations,
+      images,
+      informations,
+      onShowInformationModal,
+      onSubmit,
+      priceList,
+      videos,
+    ]
   );
 
   return (

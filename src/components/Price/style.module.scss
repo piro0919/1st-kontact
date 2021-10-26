@@ -1,0 +1,57 @@
+@use "sass:map";
+@import "styles/breakpoints";
+@import "styles/constants";
+@import "sass-mq";
+
+.list {
+  display: grid;
+  gap: 16px;
+}
+
+.itemInner {
+  align-items: center;
+  display: grid;
+  gap: 4px;
+  grid-template: auto / auto 1fr auto;
+}
+
+.line {
+  border-top: 2px dotted map.get($colors, gray);
+  width: 100%;
+}
+
+.article {
+  padding: 24px 0 0;
+}
+
+.heading3 {
+  color: map.get($colors, gray);
+  padding: 0 0 4px;
+}
+
+.imageList {
+  display: grid;
+  @include mq($until: tablet) {
+    gap: 8px;
+    grid-template: auto / repeat(3, 1fr);
+  }
+  @include mq($from: tablet) {
+    gap: 16px;
+    grid-template: auto / repeat(4, 1fr);
+  }
+}
+
+.imageWrapper {
+  background: map.get($colors, gray);
+  position: relative;
+}
+
+.imageWrapper::before {
+  content: "";
+  display: block;
+  padding: 100% 0 0;
+}
+
+.item {
+  margin: 0 0 0 1.4rem;
+}

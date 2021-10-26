@@ -11,13 +11,18 @@ import InformationModal from "components/InformationModal";
 import Top, { TopProps } from "components/Top";
 import getClient from "libs/getClient";
 
-export type PagesProps = Pick<TopProps, "informations" | "videos"> & {
+export type PagesProps = Pick<
+  TopProps,
+  "images" | "informations" | "priceList" | "videos"
+> & {
   illustrations: Pick<TopProps["illustrations"][0], "url">[];
 };
 
 function Pages({
   illustrations: illustrationsProps,
+  images,
   informations,
+  priceList,
   videos,
 }: PagesProps): JSX.Element {
   const [
@@ -110,9 +115,11 @@ function Pages({
       />
       <Top
         illustrations={illustrations}
+        images={images}
         informations={informations}
         onShowInformationModal={onShowInformationModal}
         onSubmit={handleSubmit}
+        priceList={priceList}
         videos={videos}
       />
       {showInformationModal ? (
@@ -140,8 +147,17 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
       limit: 100,
     },
   });
-  const { contents: informationList } = await client.getList<Information>({
-    endpoint: "information",
+  const { contents: deliveryImages } = await client.getList<Deliveryimages>({
+    endpoint: "deliveryimages",
+  });
+  const { contents: informationList } = await client.getList<Informationlist>({
+    endpoint: "informationlist",
+    queries: {
+      limit: 100,
+    },
+  });
+  const { contents: priceList } = await client.getList<Pricelist>({
+    endpoint: "pricelist",
     queries: {
       limit: 100,
     },
@@ -158,10 +174,15 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
       illustrations: illustrations.map(({ image: { url } }) => ({
         url,
       })),
+      images: deliveryImages.map(({ image: { url } }) => url),
       informations: informationList.map(({ date, title, urlList }) => ({
         date,
         title,
         urlList: urlList.map(({ url }) => url),
+      })),
+      priceList: priceList.map(({ title, value }) => ({
+        title,
+        value,
       })),
       videos: videos.map(({ url }) => url),
     },
