@@ -76,12 +76,37 @@ async function email(
       .map(({ key, value }) => `${key}：${value}`)
       .join("<br />");
 
-    await transporter.sendMail({
-      html,
-      from: process.env.NODEMAILER_AUTH_USER,
-      replyTo: email,
-      subject: `【1stKontact】${name}さんからメッセージです`,
-      to: process.env.NODEMAILER_AUTH_USER,
+    await new Promise((resolve, reject) => {
+      transporter.verify((error, success) => {
+        if (error) {
+          reject(error);
+
+          return;
+        }
+
+        resolve(success);
+      });
+    });
+
+    await new Promise((resolve, reject) => {
+      transporter.sendMail(
+        {
+          html,
+          from: process.env.NODEMAILER_AUTH_USER,
+          replyTo: email,
+          subject: `【1stKontact】${name}さんからメッセージです`,
+          to: process.env.NODEMAILER_AUTH_USER,
+        },
+        (err, info) => {
+          if (err) {
+            reject(err);
+
+            return;
+          }
+
+          resolve(info);
+        }
+      );
     });
 
     res.status(200).json({ result: "ok" });
