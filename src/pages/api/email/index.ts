@@ -1,6 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
+const transporter = nodemailer.createTransport({
+  auth: {
+    pass: process.env.NODEMAILER_AUTH_PASS,
+    user: process.env.NODEMAILER_AUTH_USER,
+  },
+  connectionTimeout: 60 * 30,
+  greetingTimeout: 60 * 30,
+  host: "smtp.mail.yahoo.co.jp",
+  port: 465,
+  secure: true,
+  socketTimeout: 60 * 30,
+});
+
 async function email(
   {
     body: {
@@ -19,18 +32,6 @@ async function email(
   res: NextApiResponse
 ): Promise<void> {
   try {
-    const transporter = nodemailer.createTransport({
-      auth: {
-        pass: process.env.NODEMAILER_AUTH_PASS,
-        user: process.env.NODEMAILER_AUTH_USER,
-      },
-      connectionTimeout: 60 * 30,
-      greetingTimeout: 60 * 30,
-      host: "smtp.mail.yahoo.co.jp",
-      port: 465,
-      secure: true,
-      socketTimeout: 60 * 30,
-    });
     const html = [
       {
         key: "お名前",
@@ -76,37 +77,12 @@ async function email(
       .map(({ key, value }) => `${key}：${value}`)
       .join("<br />");
 
-    await new Promise((resolve, reject) => {
-      transporter.verify((error, success) => {
-        if (error) {
-          reject(error);
-
-          return;
-        }
-
-        resolve(success);
-      });
-    });
-
-    await new Promise((resolve, reject) => {
-      transporter.sendMail(
-        {
-          html,
-          from: process.env.NODEMAILER_AUTH_USER,
-          replyTo: email,
-          subject: `【1stKontact】${name}さんからメッセージです`,
-          to: process.env.NODEMAILER_AUTH_USER,
-        },
-        (err, info) => {
-          if (err) {
-            reject(err);
-
-            return;
-          }
-
-          resolve(info);
-        }
-      );
+    await transporter.sendMail({
+      html,
+      from: process.env.NODEMAILER_AUTH_USER,
+      replyTo: email,
+      subject: `【1stKontact】${name}さんからメッセージです`,
+      to: process.env.NODEMAILER_AUTH_USER,
     });
 
     res.status(200).json({ result: "ok" });
