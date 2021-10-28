@@ -1,18 +1,7 @@
+import sgMail from "@sendgrid/mail";
 import type { NextApiRequest, NextApiResponse } from "next";
-import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
-  auth: {
-    pass: process.env.NODEMAILER_AUTH_PASS,
-    user: process.env.NODEMAILER_AUTH_USER,
-  },
-  connectionTimeout: 60 * 30,
-  greetingTimeout: 60 * 30,
-  host: "smtp.mail.yahoo.co.jp",
-  port: 465,
-  secure: true,
-  socketTimeout: 60 * 30,
-});
+sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
 
 async function email(
   {
@@ -77,12 +66,11 @@ async function email(
       .map(({ key, value }) => `${key}：${value}`)
       .join("<br />");
 
-    await transporter.sendMail({
+    await sgMail.send({
       html,
-      from: process.env.NODEMAILER_AUTH_USER,
-      replyTo: email,
+      from: email,
       subject: `【1stKontact】${name}さんからメッセージです`,
-      to: process.env.NODEMAILER_AUTH_USER,
+      to: process.env.MAIL_ADDRESS,
     });
 
     res.status(200).json({ result: "ok" });
