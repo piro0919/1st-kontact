@@ -25,7 +25,14 @@ function Illustration({ illustrations }: IllustrationProps): JSX.Element {
         .map(({ onClick, url }, index) => (
           <li key={index}>
             <div className={styles.imageWrapper} onClick={onClick}>
-              <Image alt="" layout="fill" objectFit="cover" src={url} />
+              <Image
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+                src={url}
+                unoptimized={true}
+              />
             </div>
           </li>
         )),

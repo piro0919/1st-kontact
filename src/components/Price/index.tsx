@@ -46,7 +46,14 @@ function Price({
       images.map(({ onClick, url }) => (
         <li key={url}>
           <div className={styles.imageWrapper} onClick={onClick}>
-            <Image alt="" layout="fill" objectFit="contain" src={url} />
+            <Image
+              alt=""
+              layout="fill"
+              objectFit="contain"
+              quality={100}
+              src={url}
+              unoptimized={true}
+            />
           </div>
         </li>
       )),
