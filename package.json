@@ -64,7 +64,7 @@
   "name": "1st-kontact",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' next build",
     "dev": "NODE_OPTIONS='--openssl-legacy-provider' next dev",
     "lint": "npm-run-all --parallel lint:next lint:style",
     "lint:es": "eslint src --ext .ts,.tsx --fix",
