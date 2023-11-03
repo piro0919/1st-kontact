@@ -29,7 +29,8 @@
 }
 
 .input,
-.textarea {
+.textarea,
+.termsOfServiceWrapper {
   background: map.get($colors, lightgray);
   color: map.get($colors, white);
   padding: 4px 8px;
@@ -44,6 +45,22 @@
 .errorWrapper {
   color: #f00;
   margin: 4px 0 0;
+}
+
+.termsOfServiceField {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  + .errorWrapper {
+    text-align: center;
+  }
+}
+
+.termsOfServiceWrapper {
+  height: 240px;
+  overflow: hidden scroll;
 }
 
 .buttonWrapper {

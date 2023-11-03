@@ -9,6 +9,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import Layout from "components/Layout";
+import "@djthoms/pretty-checkbox";
 
 if (process.env.NODE_ENV === "development") {
   require("../styles/show-breakpoints.scss");

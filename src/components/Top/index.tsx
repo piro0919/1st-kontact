@@ -9,7 +9,7 @@ import Price, { PriceProps } from "components/Price";
 import Profile from "components/Profile";
 
 export type TopProps = Pick<IllustrationProps, "illustrations"> &
-  Pick<ContactProps, "onSubmit"> &
+  Pick<ContactProps, "onSubmit" | "termsOfService"> &
   Pick<InformationProps, "informations"> &
   Pick<MovieProps, "videos"> &
   Pick<
@@ -33,6 +33,7 @@ function Top({
   onShowInformationModal,
   onSubmit,
   priceList,
+  termsOfService,
   videos,
 }: TopProps): JSX.Element {
   const items = useMemo(
@@ -78,7 +79,9 @@ function Top({
           maxWidth: "720px",
         },
         {
-          children: <Contact onSubmit={onSubmit} />,
+          children: (
+            <Contact onSubmit={onSubmit} termsOfService={termsOfService} />
+          ),
           className: styles.rightJustified,
           heading: "Contact",
           maxWidth: "720px",

@@ -29,6 +29,7 @@ type Pricedetail = {
   datehtml: string;
   flowhtml: string;
   pricehtml: string;
+  termsOfService: string;
 };
 
 type Pricelist = {

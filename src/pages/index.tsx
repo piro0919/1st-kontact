@@ -18,6 +18,7 @@ export type PagesProps = Pick<
   | "flowToDelivery"
   | "informations"
   | "priceList"
+  | "termsOfService"
   | "videos"
 > & {
   illustrations: string[];
@@ -32,6 +33,7 @@ function Pages({
   images: imagesProps,
   informations,
   priceList,
+  termsOfService,
   videos,
 }: PagesProps): JSX.Element {
   const [
@@ -138,6 +140,7 @@ function Pages({
         onShowInformationModal={onShowInformationModal}
         onSubmit={handleSubmit}
         priceList={priceList}
+        termsOfService={termsOfService}
         videos={videos}
       />
       {showInformationModal ? (
@@ -181,11 +184,10 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
       limit: 100,
     },
   });
-  const { datehtml, flowhtml, pricehtml } = await client.getObject<Pricedetail>(
-    {
+  const { datehtml, flowhtml, pricehtml, termsOfService } =
+    await client.getObject<Pricedetail>({
       endpoint: "pricedetail",
-    }
-  );
+    });
   const { contents: priceList } = await client.getList<Pricelist>({
     endpoint: "pricelist",
     queries: {
@@ -201,6 +203,7 @@ export const getStaticProps: GetStaticProps<PagesProps> = async () => {
 
   return {
     props: {
+      termsOfService,
       aboutDeliveryTime: datehtml,
       aboutPrice: pricehtml,
       flowToDelivery: flowhtml,

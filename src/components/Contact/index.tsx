@@ -1,5 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import parse from "html-react-parser";
+import { Checkbox } from "pretty-checkbox-react";
+import React, { useState } from "react";
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import styles from "./style.module.scss";
@@ -11,6 +14,7 @@ type FieldValues = {
   date: string;
   email: string;
   homepage: string;
+  isAgree: boolean;
   media: string;
   name: string;
   others: string;
@@ -27,6 +31,7 @@ const schema = yup.object().shape({
     .required("Emailを入力してください")
     .email("Emailの形式で入力してください"),
   homepage: yup.string().url("urlの形式で入力してください"),
+  isAgree: yup.boolean().isTrue("利用規約に同意してください"),
   media: yup.string().required("リリース媒体を入力してください"),
   name: yup.string().required("お名前を入力してください"),
   others: yup.string().required("その他、案件内容について入力してください"),
@@ -35,9 +40,10 @@ const schema = yup.object().shape({
 
 export type ContactProps = {
   onSubmit: SubmitHandler<FieldValues>;
+  termsOfService: string;
 };
 
-function Contact({ onSubmit }: ContactProps): JSX.Element {
+function Contact({ onSubmit, termsOfService }: ContactProps): JSX.Element {
   const {
     formState: { errors },
     handleSubmit,
@@ -50,12 +56,17 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
       date: "",
       email: "",
       homepage: "",
+      isAgree: false,
       media: "",
       name: "",
       others: "",
       release: "",
     },
     resolver: yupResolver(schema),
+  });
+  const [enableAgree, setEnableAgree] = useState(false);
+  const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {
+    setEnableAgree(true);
   });
 
   return (
@@ -192,6 +203,26 @@ function Contact({ onSubmit }: ContactProps): JSX.Element {
           />
           {errors.others ? (
             <p className={styles.errorWrapper}>{errors.others.message}</p>
+          ) : null}
+        </div>
+        <div className={styles.fieldWrapper}>
+          <label className={styles.label} htmlFor="isAgree">
+            利用規約<abbr className={styles.abbr}>*</abbr>
+          </label>
+          <div className={styles.termsOfServiceField}>
+            <div className={styles.termsOfServiceWrapper} ref={scrollRef}>
+              {parse(termsOfService)}
+            </div>
+            <Checkbox
+              {...register("isAgree", { required: true })}
+              disabled={!enableAgree}
+              id="isAgree"
+            >
+              上記の内容に同意する
+            </Checkbox>
+          </div>
+          {errors.isAgree ? (
+            <p className={styles.errorWrapper}>{errors.isAgree.message}</p>
           ) : null}
         </div>
       </div>
