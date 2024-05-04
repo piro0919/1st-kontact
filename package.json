@@ -36,7 +36,7 @@
     "@types/react": "17.0.31",
     "@types/react-aria-modal": "4.0.5",
     "@typescript-eslint/eslint-plugin": "5.1.0",
-    "eslint": "7.32.0",
+    "eslint": "9.2.0",
     "eslint-config-google": "0.14.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "8.3.0",
