@@ -15,8 +15,21 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "1stKontact - イラストレーター「こんたくん」オフィシャルサイト",
+  title: {
+    default: "1stKontact - イラストレーター「こんたくん」オフィシャルサイト",
+    template: "%s - 1stKontact",
+  },
   description: "イラストレーター「こんたくん」のオフィシャルサイトです。",
+  openGraph: {
+    title: "1stKontact - イラストレーター「こんたくん」オフィシャルサイト",
+    description: "イラストレーター「こんたくん」のオフィシャルサイトです。",
+    type: "website",
+    locale: "ja_JP",
+    siteName: "1stKontact",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

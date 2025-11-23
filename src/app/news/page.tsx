@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import { use } from "react";
 import client from "@/lib/client";
 import News from "./_components/News";
+
+export const metadata: Metadata = {
+  title: "News",
+  description: "こんたくんの最新情報・お知らせです。",
+  openGraph: {
+    title: "News | 1stKontact",
+    description: "こんたくんの最新情報・お知らせです。",
+  },
+};
 
 const getInformationList = async () => {
   const informationList = await client.getList({
