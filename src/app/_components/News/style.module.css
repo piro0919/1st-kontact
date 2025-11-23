@@ -1,0 +1,59 @@
+.container {
+  width: min(100%, 720px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.date {
+  font-size: 1.2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  display: inline;
+}
+
+.favicon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-left: 4px;
+  vertical-align: middle;
+  background: #242426;
+}
+
+.viewMoreContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.viewMore {
+  background: #501a28;
+  border: 2px solid #ff517d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 8px 8px 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}

@@ -1,0 +1,29 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(1px);
+  color: #ecedee;
+  height: 60px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.active {
+  color: #51c2bc;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.name {
+  font-size: 1.2rem;
+}

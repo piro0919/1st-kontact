@@ -1,0 +1,29 @@
+.container {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  @media (width < 768px) {
+    padding-bottom: 60px;
+  }
+}
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+}
+
+.content {
+  margin-top: 48px;
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 100;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}

@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+.imageContainer {
+  aspect-ratio: 1 / 1;
+  width: min(200px, 40dvw);
+  height: min(200px, 40dvw);
+  position: relative;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name {
+  font-size: 1.5rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+.list {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}

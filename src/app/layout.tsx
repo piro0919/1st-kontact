@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+import Layout from "./_components/Layout";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+import "swiper/css/thumbs";
+import "swiper/css/free-mode";
+import "@djthoms/pretty-checkbox";
+import "yet-another-react-lightbox/styles.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "1stKontact",
-  description: "",
+  title: "1stKontact - イラストレーター「こんたくん」オフィシャルサイト",
+  description: "イラストレーター「こんたくん」のオフィシャルサイトです。",
 };
 
 export default function RootLayout({
@@ -24,8 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+      <body className={notoSansJP.className}>
+        <Layout>{children}</Layout>
       </body>
     </html>
   );

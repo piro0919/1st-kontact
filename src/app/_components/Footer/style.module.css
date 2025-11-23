@@ -1,0 +1,10 @@
+.footer {
+  padding: 0 min(24px, 4dvw);
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.copyright {
+  font-size: 1.2rem;
+}

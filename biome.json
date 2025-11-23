@@ -9,6 +9,11 @@
     "ignoreUnknown": true,
     "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
   },
+  "css": {
+    "parser": {
+      "cssModules": true
+    }
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -17,7 +22,19 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "a11y": {
+        "useIframeTitle": "warn",
+        "noLabelWithoutControl": "warn",
+        "noStaticElementInteractions": "warn",
+        "useKeyWithClickEvents": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "warn"
+      },
+      "complexity": {
+        "noImportantStyles": "warn"
+      }
     },
     "domains": {
       "next": "recommended",

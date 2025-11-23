@@ -1,12 +1,12 @@
 import { use } from "react";
 import client from "@/lib/client";
-import App from "./_components/App";
+import Works from "./_components/Works";
 
 const getIllustrations = async () => {
   const illustrations = await client.getList({
     endpoint: "illustrations",
     queries: {
-      limit: 6,
+      limit: 100,
     },
     customRequestInit: {
       next: { revalidate: 86400 },
@@ -19,7 +19,7 @@ const getInformationList = async () => {
   const informationList = await client.getList({
     endpoint: "informationlist",
     queries: {
-      limit: 4,
+      limit: 100,
     },
     customRequestInit: {
       next: { revalidate: 86400 },
@@ -28,29 +28,14 @@ const getInformationList = async () => {
   return informationList;
 };
 
-const getVideos = async () => {
-  const videos = await client.getList({
-    endpoint: "videos",
-    queries: {
-      limit: 1,
-    },
-    customRequestInit: {
-      next: { revalidate: 86400 },
-    },
-  });
-  return videos;
-};
-
 export default function Page() {
   const illustrations = use(getIllustrations());
   const informationList = use(getInformationList());
-  const videos = use(getVideos());
 
   return (
-    <App
+    <Works
       illustrations={illustrations.contents}
       informationList={informationList.contents}
-      videos={videos.contents}
     />
   );
 }

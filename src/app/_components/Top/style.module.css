@@ -1,0 +1,52 @@
+.container {
+  height: calc(90svh - 64px);
+  width: 100dvw;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sub {
+  height: 25svh;
+}
+
+.container::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url("/dot.png");
+  background-size: 5px;
+  background-position: center;
+  background-repeat: repeat;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+.container::after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: transparent
+    linear-gradient(#111 0%, transparent 30%, transparent 70%, #111 100%) repeat
+    scroll 0 0;
+  z-index: 2;
+}
+
+.iframe {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.h2 {
+  font-size: 7.2rem;
+  position: absolute;
+  z-index: 2;
+}

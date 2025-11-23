@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     useLightningcss: true,
   },
   images: {
+    qualities: [100],
     unoptimized: true,
   },
   reactCompiler: true,

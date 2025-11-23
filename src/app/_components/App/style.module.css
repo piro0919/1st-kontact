@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 64px;
+  padding: 48px 0;
+}
+
+.article {
+  width: min(100%, 1024px);
+  margin: 0 auto;
+  padding: 0 min(24px, 4dvw);
+  display: grid;
+  z-index: 2;
+  position: relative;
+  align-items: flex-start;
+}
+
+.article:nth-child(even) {
+  grid-template-columns: 1fr auto;
+}
+
+.article:nth-child(odd) {
+  grid-template-columns: auto 1fr;
+}
+
+.h2Container {
+  transform: rotate(180deg);
+  align-items: flex-end;
+  display: flex;
+}
+
+.h2 {
+  font-size: min(7.2rem, 7.5dvw);
+  writing-mode: vertical-rl;
+  color: #51c2bc;
+}

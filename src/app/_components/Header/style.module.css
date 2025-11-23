@@ -1,0 +1,36 @@
+.header {
+  padding: 0 min(24px, 4dvw);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  background: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(1px);
+
+  @media (width < 768px) {
+    background: transparent;
+    backdrop-filter: none;
+  }
+}
+
+.title {
+  font-size: min(8rem, 12dvw);
+  position: absolute;
+  inset: 0 auto auto 0;
+  padding-left: min(24px, 4dvw);
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  font-size: 1.8rem;
+
+  @media (width < 768px) {
+    display: none;
+  }
+}
+
+.active {
+  color: #51c2bc;
+}

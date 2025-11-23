@@ -1,0 +1,83 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: min(100%, 768px);
+  margin: 0 auto;
+  padding: 48px min(24px, 4dvw);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 1.2rem;
+  display: flex;
+  gap: 4px;
+}
+
+.input,
+.textarea,
+.termsOfService {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #525966;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 8px;
+}
+
+.termsOfService {
+  height: min(240px, 30svh);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+}
+
+.termsOfService > h3 {
+  font-size: 1.5rem;
+}
+
+.termsOfService > ul {
+  font-size: 1.2rem;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  font-size: 1.35rem;
+  margin-top: 16px;
+}
+
+.error {
+  color: #f00;
+  font-size: 1.2rem;
+}
+
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton {
+  background: #501a28;
+  border: 2px solid #ff517d;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 8px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
