@@ -45,13 +45,16 @@ export default function Works({ illustrations, informationList }: WorksProps) {
   const [slideKey, setSlideKey] = useState(0);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
   const [index, setIndex] = useState<number | null>(null);
-
   // スライド変更時に全ての動画を停止（keyを変更して再マウント）
   const handleSlideChange = () => {
     setIsPlaying(false);
     setSlideKey((prev) => prev + 1);
     setPlayingIndex(null);
   };
+  // 年を降順でソート
+  const years = Object.keys(illustrationsByYear)
+    .map(Number)
+    .sort((a, b) => b - a);
 
   // 動画再生中はautoplayを停止
   useEffect(() => {
@@ -62,11 +65,6 @@ export default function Works({ illustrations, informationList }: WorksProps) {
       mainSwiper.autoplay.start();
     }
   }, [isPlaying, mainSwiper]);
-
-  // 年を降順でソート
-  const years = Object.keys(illustrationsByYear)
-    .map(Number)
-    .sort((a, b) => b - a);
 
   return (
     <>
