@@ -7,23 +7,12 @@ import { useState } from "react";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import { z } from "zod";
+import type { z } from "zod";
 import type { Schema } from "@/lib/client";
 import styles from "./style.module.css";
-
-const schema = z.object({
-  budget: z.string().min(1),
-  client: z.string().min(1),
-  content: z.string().min(1),
-  date: z.string().min(1),
-  email: z.email().min(1),
-  homepage: z.url().min(1),
-  isAgree: z.boolean(),
-  media: z.string().min(1),
-  name: z.string().min(1),
-  others: z.string().min(1),
-  release: z.string().min(1),
-});
+import { sendEmailSchema } from "../../schema";
+import { sendEmail } from "../../actions";
+import { useRouter } from "next/navigation";
 
 export type ContactProps = {
   priceDetail: Schema["pricedetail"];
@@ -34,8 +23,8 @@ export default function Contact({ priceDetail }: ContactProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+  } = useForm<z.infer<typeof sendEmailSchema>>({
+    resolver: zodResolver(sendEmailSchema),
     defaultValues: {
       budget: "",
       client: "",
@@ -50,8 +39,11 @@ export default function Contact({ priceDetail }: ContactProps) {
       release: "",
     },
   });
-  const onSubmit = (data: z.infer<typeof schema>) => {
-    console.log(data);
+  const router = useRouter();
+  const onSubmit = async (data: z.infer<typeof sendEmailSchema>) => {
+    await sendEmail(data);
+
+    router.push("/contact/success");
   };
   const [enableAgree, setEnableAgree] = useState(false);
   const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {

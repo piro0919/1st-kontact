@@ -80,16 +80,16 @@ export default function Top() {
       ref={ref}
     >
       <iframe className={styles.iframe} src={src} style={iframeStyle} />
-      {pathname === "/news" ? (
+      {pathname.startsWith("/news") ? (
         <h2 className={`${blackOpsOne.className} ${styles.h2}`}>News</h2>
       ) : null}
-      {pathname === "/works" ? (
+      {pathname.startsWith("/works") ? (
         <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Works</h2>
       ) : null}
-      {pathname === "/pricing" ? (
+      {pathname.startsWith("/pricing") ? (
         <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Pricing</h2>
       ) : null}
-      {pathname === "/contact" ? (
+      {pathname.startsWith("/contact") ? (
         <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Contact</h2>
       ) : null}
     </div>

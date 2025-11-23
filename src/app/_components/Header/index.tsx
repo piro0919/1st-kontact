@@ -29,16 +29,16 @@ export default function Header() {
       </Link>
       <nav>
         <ul className={`${blackOpsOne.className} ${styles.list}`}>
-          <li className={pathname === "/news" ? styles.active : ""}>
+          <li className={pathname.startsWith("/news") ? styles.active : ""}>
             <Link href="/news">News</Link>
           </li>
-          <li className={pathname === "/works" ? styles.active : ""}>
+          <li className={pathname.startsWith("/works") ? styles.active : ""}>
             <Link href="/works">Works</Link>
           </li>
-          <li className={pathname === "/pricing" ? styles.active : ""}>
+          <li className={pathname.startsWith("/pricing") ? styles.active : ""}>
             <Link href="/pricing">Pricing</Link>
           </li>
-          <li className={pathname === "/contact" ? styles.active : ""}>
+          <li className={pathname.startsWith("/contact") ? styles.active : ""}>
             <Link href="/contact">Contact</Link>
           </li>
         </ul>
