@@ -73,25 +73,27 @@ export default function Top() {
       .join("&"),
   ].join("?");
   const pathname = usePathname();
+  const subPageTitles: Record<string, string> = {
+    "/news": "News",
+    "/works": "Works",
+    "/pricing": "Pricing",
+    "/contact": "Contact",
+  };
+  const currentTitle = Object.entries(subPageTitles).find(([path]) =>
+    pathname.startsWith(path),
+  )?.[1];
 
   return (
     <div
-      className={`${styles.container} ${pathname === "/" ? "" : styles.sub}`}
+      className={`${styles.container} ${currentTitle ? styles.sub : ""}`}
       ref={ref}
     >
       <iframe className={styles.iframe} src={src} style={iframeStyle} />
-      {pathname.startsWith("/news") ? (
-        <h2 className={`${blackOpsOne.className} ${styles.h2}`}>News</h2>
-      ) : null}
-      {pathname.startsWith("/works") ? (
-        <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Works</h2>
-      ) : null}
-      {pathname.startsWith("/pricing") ? (
-        <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Pricing</h2>
-      ) : null}
-      {pathname.startsWith("/contact") ? (
-        <h2 className={`${blackOpsOne.className} ${styles.h2}`}>Contact</h2>
-      ) : null}
+      {currentTitle && (
+        <h2 className={`${blackOpsOne.className} ${styles.h2}`}>
+          {currentTitle}
+        </h2>
+      )}
     </div>
   );
 }
