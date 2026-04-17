@@ -31,8 +31,8 @@
     "@commitlint/config-conventional": "20.0.0",
     "@secretlint/secretlint-rule-preset-recommend": "11.2.5",
     "@total-typescript/ts-reset": "0.6.1",
-    "@types/node": "^20",
-    "@types/nodemailer": "7.0.4",
+    "@types/node": "^24.0.0",
+    "@types/nodemailer": "8.0.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@uphold/commitlint-config": "1.1.1",
@@ -40,7 +40,7 @@
     "better-typescript-lib": "2.12.0",
     "lefthook": "2.0.4",
     "secretlint": "11.2.5",
-    "typescript": "^5"
+    "typescript": "^6.0.0"
   },
   "name": "1st-kontact2",
   "private": true,
