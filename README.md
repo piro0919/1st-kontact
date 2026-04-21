@@ -2,7 +2,7 @@
 
 > Official website for illustrator Kontakun.
 
-[🔗 Live Site](https://1st-kontact.vercel.app)
+[🔗 Live Site](https://konta-niki.com/)
 
 ## ✨ Features
 
