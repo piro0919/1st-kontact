@@ -1,6 +1,6 @@
 # 1stKontact
 
-> Official website for illustrator こんたくん (Kontakun).
+> Official website for illustrator Kontakun.
 
 [🔗 Live Site](https://1st-kontact.vercel.app)
 
@@ -21,3 +21,7 @@
 pnpm install
 pnpm dev
 ```
+
+## 📄 License
+
+MIT
