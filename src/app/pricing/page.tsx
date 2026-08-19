@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
 import { use } from "react";
 import client from "@/lib/client";
+import pageMetadata from "../pageMetadata";
 import Pricing from "./_components/Pricing";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata = pageMetadata({
   description: "イラスト制作の料金表です。ご依頼の際の参考にしてください。",
-  openGraph: {
-    title: "Pricing | 1stKontact",
-    description: "イラスト制作の料金表です。ご依頼の際の参考にしてください。",
-  },
-};
+  path: "/pricing",
+  title: "Pricing",
+});
 
 const getDeliveryImages = async () => {
   const deliveryImages = await client.getList({

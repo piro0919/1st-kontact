@@ -1,18 +1,14 @@
-import type { Metadata } from "next";
 import { use } from "react";
 import client from "@/lib/client";
+import pageMetadata from "../pageMetadata";
 import Works from "./_components/Works";
 
-export const metadata: Metadata = {
-  title: "Works",
+export const metadata = pageMetadata({
   description:
     "こんたくんのイラスト作品一覧です。これまでに制作したイラストをご覧いただけます。",
-  openGraph: {
-    title: "Works | 1stKontact",
-    description:
-      "こんたくんのイラスト作品一覧です。これまでに制作したイラストをご覧いただけます。",
-  },
-};
+  path: "/works",
+  title: "Works",
+});
 
 const getIllustrations = async () => {
   const illustrations = await client.getList({

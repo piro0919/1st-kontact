@@ -15,6 +15,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://konta-niki.com"),
+  alternates: { canonical: "/" },
   title: {
     default: "1stKontact - イラストレーター「こんたくん」オフィシャルサイト",
     template: "%s - 1stKontact",
@@ -26,6 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
     siteName: "1stKontact",
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",
