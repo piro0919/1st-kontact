@@ -2,6 +2,7 @@
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import { ErrorMessage } from "@hookform/error-message";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Checkbox } from "pretty-checkbox-react";
 import { useState } from "react";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
@@ -9,10 +10,9 @@ import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import type { z } from "zod";
 import type { Schema } from "@/lib/client";
-import styles from "./style.module.css";
-import { sendEmailSchema } from "../../schema";
 import { sendEmail } from "../../actions";
-import { useRouter } from "next/navigation";
+import { sendEmailSchema } from "../../schema";
+import styles from "./style.module.css";
 
 export type ContactProps = {
   priceDetail: Schema["pricedetail"];
@@ -241,6 +241,7 @@ export default function Contact({ priceDetail }: ContactProps) {
         <div
           className={styles.termsOfService}
           ref={scrollRef}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: microCMS のリッチテキストを描画する
           dangerouslySetInnerHTML={{ __html: priceDetail.termsOfService }}
         />
         <label htmlFor="isAgree" className={styles.checkboxContainer}>

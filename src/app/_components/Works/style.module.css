@@ -17,7 +17,9 @@
 }
 
 .iframe {
+  /* biome-ignore lint/complexity/noImportantStyles: 埋め込み iframe の inline 属性に勝つ必要がある */
   width: 100% !important;
+  /* biome-ignore lint/complexity/noImportantStyles: 埋め込み iframe の inline 属性に勝つ必要がある */
   height: 100% !important;
 }
 

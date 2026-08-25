@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import ReactPlayer from "react-player";
+import Lightbox from "yet-another-react-lightbox";
 import type { Schema } from "@/lib/client";
 import styles from "./style.module.css";
-import Lightbox from "yet-another-react-lightbox";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

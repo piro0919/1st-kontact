@@ -85,6 +85,7 @@ export default function Pricing({
               <section className={styles.section}>
                 <h3 className={styles.h3}>料金について</h3>
                 <div
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: microCMS のリッチテキストを描画する
                   dangerouslySetInnerHTML={{ __html: priceDetail.pricehtml }}
                   className={styles.content}
                 />
@@ -92,6 +93,7 @@ export default function Pricing({
               <section className={styles.section}>
                 <h3 className={styles.h3}>納品について</h3>
                 <div
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: microCMS のリッチテキストを描画する
                   dangerouslySetInnerHTML={{ __html: priceDetail.datehtml }}
                   className={styles.content}
                 />
@@ -99,6 +101,7 @@ export default function Pricing({
               <section className={styles.section}>
                 <h3 className={styles.h3}>フローについて</h3>
                 <div
+                  // biome-ignore lint/security/noDangerouslySetInnerHtml: microCMS のリッチテキストを描画する
                   dangerouslySetInnerHTML={{ __html: priceDetail.flowhtml }}
                   className={styles.content}
                 />

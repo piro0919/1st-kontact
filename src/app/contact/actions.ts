@@ -1,8 +1,8 @@
 "use server";
-import { sendEmailSchema } from "./schema";
-import type { z } from "zod";
 import nodemailer from "nodemailer";
+import type { z } from "zod";
 import env from "@/env";
+import { sendEmailSchema } from "./schema";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
