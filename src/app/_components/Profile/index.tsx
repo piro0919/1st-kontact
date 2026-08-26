@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { SiAmazon, SiPixiv, SiX } from "react-icons/si";
+import { FaAmazon } from "react-icons/fa6";
+import { SiPixiv, SiX } from "react-icons/si";
 import Spacer from "react-spacer";
 import styles from "./style.module.css";
 
@@ -38,7 +39,7 @@ export default function Profile() {
               rel="noopener noreferrer"
               target="_blank"
             >
-              <SiAmazon size={24} />
+              <FaAmazon size={24} />
             </a>
           </li>
         </ul>
