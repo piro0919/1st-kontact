@@ -34,7 +34,7 @@
     "@types/node": "^20.19.43",
     "@types/nodemailer": "7.0.12",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@types/react-dom": "^19.2.5",
     "@uphold/commitlint-config": "1.1.1",
     "babel-plugin-react-compiler": "1.0.0",
     "better-typescript-lib": "2.12.0",
