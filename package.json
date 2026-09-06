@@ -26,7 +26,7 @@
     "zod": "4.5.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.11",
+    "@biomejs/biome": "2.5.12",
     "@commitlint/cli": "20.5.3",
     "@commitlint/config-conventional": "20.5.3",
     "@secretlint/secretlint-rule-preset-recommend": "11.7.1",
@@ -34,7 +34,7 @@
     "@types/node": "^20.19.43",
     "@types/nodemailer": "7.0.12",
     "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@types/react-dom": "^19.2.7",
     "@uphold/commitlint-config": "1.1.1",
     "babel-plugin-react-compiler": "1.0.0",
     "better-typescript-lib": "2.12.0",
