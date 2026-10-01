@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
 import type { Schema } from "@/lib/client";
+import { GRID_IMAGE_WIDTH, microCMSImageUrl } from "@/lib/microcms-image";
 import styles from "./style.module.css";
 
 const blackOpsOne = Black_Ops_One({
@@ -53,7 +54,7 @@ export default function Pricing({
               </h2>
             </div>
             <ul className={styles.list}>
-              {deliveryImages.map((deliveryImage) => (
+              {deliveryImages.map((deliveryImage, i) => (
                 <li key={deliveryImage.id}>
                   <div
                     className={styles.imageContainer}
@@ -66,11 +67,12 @@ export default function Pricing({
                     }
                   >
                     <Image
-                      src={deliveryImage.image.url}
-                      alt={new URL(deliveryImage.image.url).hostname}
+                      src={microCMSImageUrl(deliveryImage.image, {
+                        width: GRID_IMAGE_WIDTH,
+                      })}
+                      alt={`納品イメージ ${i + 1}`}
                       fill={true}
                       className={styles.image}
-                      quality={100}
                     />
                   </div>
                 </li>

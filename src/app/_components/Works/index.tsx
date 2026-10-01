@@ -7,6 +7,7 @@ import { useState } from "react";
 import ReactPlayer from "react-player";
 import Lightbox from "yet-another-react-lightbox";
 import type { Schema } from "@/lib/client";
+import { GRID_IMAGE_WIDTH, microCMSImageUrl } from "@/lib/microcms-image";
 import styles from "./style.module.css";
 
 const montserrat = Montserrat({
@@ -50,7 +51,9 @@ export default function Works({ videos, illustrations }: WorksProps) {
                 onClick={() => setIndex(index)}
               >
                 <Image
-                  src={illustration.image.url}
+                  src={microCMSImageUrl(illustration.image, {
+                    width: GRID_IMAGE_WIDTH,
+                  })}
                   alt=""
                   fill={true}
                   className={styles.image}

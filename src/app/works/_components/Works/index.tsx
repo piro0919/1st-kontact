@@ -14,6 +14,7 @@ import {
 import { Swiper, type SwiperClass, SwiperSlide } from "swiper/react";
 import Lightbox from "yet-another-react-lightbox";
 import type { Schema } from "@/lib/client";
+import { GRID_IMAGE_WIDTH, microCMSImageUrl } from "@/lib/microcms-image";
 import styles from "./style.module.css";
 
 const blackOpsOne = Black_Ops_One({
@@ -191,7 +192,7 @@ export default function Works({ illustrations, informationList }: WorksProps) {
               }${year}`}</h2>
             </div>
             <ul className={styles.list}>
-              {illustrationsByYear[year].map((illustration) => (
+              {illustrationsByYear[year].map((illustration, i) => (
                 <li key={illustration.image.url}>
                   <div
                     className={styles.imageContainer}
@@ -204,11 +205,12 @@ export default function Works({ illustrations, informationList }: WorksProps) {
                     }
                   >
                     <Image
-                      src={illustration.image.url}
-                      alt={new URL(illustration.image.url).hostname}
+                      src={microCMSImageUrl(illustration.image, {
+                        width: GRID_IMAGE_WIDTH,
+                      })}
+                      alt={`${year}年のイラスト ${i + 1}`}
                       fill={true}
                       className={styles.image}
-                      quality={100}
                     />
                   </div>
                 </li>
