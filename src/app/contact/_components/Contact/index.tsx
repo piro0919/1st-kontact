@@ -22,7 +22,7 @@ export default function Contact({ priceDetail }: ContactProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<z.infer<typeof sendEmailSchema>>({
     resolver: zodResolver(sendEmailSchema),
     defaultValues: {
@@ -31,6 +31,7 @@ export default function Contact({ priceDetail }: ContactProps) {
       content: "",
       date: "",
       email: "",
+      extraNote: "",
       homepage: "",
       isAgree: false,
       media: "",
@@ -40,11 +41,30 @@ export default function Contact({ priceDetail }: ContactProps) {
     },
   });
   const router = useRouter();
+  const [submitError, setSubmitError] = useState(false);
+  // 成功したら遷移が終わるまで押せないままにして、二重送信を防ぐ
+  const [isSent, setIsSent] = useState(false);
   const onSubmit = async (data: z.infer<typeof sendEmailSchema>) => {
-    await sendEmail(data);
+    setSubmitError(false);
 
+    try {
+      const result = await sendEmail(data);
+
+      if (!result.success) {
+        setSubmitError(true);
+
+        return;
+      }
+    } catch {
+      setSubmitError(true);
+
+      return;
+    }
+
+    setIsSent(true);
     router.push("/contact/success");
   };
+  const isSending = isSubmitting || isSent;
   const [enableAgree, setEnableAgree] = useState(false);
   const scrollRef = useBottomScrollListener<HTMLDivElement>(() => {
     setEnableAgree(true);
@@ -260,9 +280,29 @@ export default function Contact({ priceDetail }: ContactProps) {
           render={({ message }) => <p className={styles.error}>{message}</p>}
         />
       </div>
+      <div className={styles.honeypot} aria-hidden="true">
+        <label htmlFor="extraNote">この欄は空のままにしてください</label>
+        <input
+          type="text"
+          id="extraNote"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("extraNote")}
+        />
+      </div>
+      {submitError && (
+        <p className={styles.error} role="alert">
+          送信できませんでした。時間をおいてもう一度お試しください。
+        </p>
+      )}
       <div className={styles.submitButtonContainer}>
-        <button type="submit" className={styles.submitButton}>
-          <span>送信</span>
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isSending}
+          aria-busy={isSending}
+        >
+          <span>{isSending ? "送信中" : "送信"}</span>
           <ChevronRightIcon className={styles.icon} />
         </button>
       </div>

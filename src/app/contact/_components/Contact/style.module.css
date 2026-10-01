@@ -60,6 +60,15 @@
   font-size: 1.2rem;
 }
 
+/* ボット除けの隠し欄。display: none だと埋めないボットがいるので、画面外へ出す */
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .submitButtonContainer {
   display: flex;
   justify-content: center;
