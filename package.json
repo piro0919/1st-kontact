@@ -29,6 +29,7 @@
     "@biomejs/biome": "2.5.15",
     "@commitlint/cli": "20.5.3",
     "@commitlint/config-conventional": "20.5.3",
+    "@piro0919/biome-config": "github:piro0919/biome-config#v1.0.0",
     "@secretlint/secretlint-rule-preset-recommend": "11.7.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/node": "^20.19.43",
