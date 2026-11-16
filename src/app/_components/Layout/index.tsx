@@ -1,6 +1,6 @@
 "use client";
 import { type ReactNode, useEffect } from "react";
-import useShowWindowSize from "use-show-window-size";
+import { useShowWindowSize } from "use-show-window-size";
 import { z } from "zod";
 import ja from "zod/v4/locales/ja.js";
 import Footer from "../Footer";
